@@ -1,463 +1,227 @@
-// ============================================
-// PORTFOLIO WEBSITE - JAVASCRIPT
-// Animations, Scroll Effects, and Interactions
-// ============================================
-
-// ============================================
-// SCROLL ANIMATIONS
-// ============================================
-
-// Intersection Observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = entry.target.dataset.animation || 'fadeInUp 0.8s ease-out forwards';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Apply animations to elements with scroll-animate class
-document.addEventListener('DOMContentLoaded', function () {
-    const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.animationDelay = `${index * 0.1}s`;
-        observer.observe(el);
-    });
+// Remove Loader when window loads
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    if (loader) {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.remove(), 500);
+    }
 });
 
-// ============================================
-// SKILL BARS ANIMATION
-// ============================================
+// Dynamic Typing Effect
+const roles = ["AI Enthusiast", "ML Learner", "Problem Solver"];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingElement = document.querySelector('.typing-text');
+const typeSpeed = 100;
+const deleteSpeed = 50;
+const delayBetweenWords = 2000;
 
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-bar');
+function typeEffect() {
+    if (!typingElement) return;
 
-    skillBars.forEach(bar => {
-        const percentage = bar.parentElement.dataset.percentage || 80;
-        bar.style.animationPlayState = 'running';
-        bar.style.setProperty('--bar-width', percentage + '%');
-        setTimeout(() => {
-            bar.style.width = percentage + '%';
-        }, 100);
-    });
+    const currentRole = roles[roleIndex];
+
+    if (isDeleting) {
+        typingElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typingElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    let speed = isDeleting ? deleteSpeed : typeSpeed;
+
+    if (!isDeleting && charIndex === currentRole.length) {
+        speed = delayBetweenWords;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        speed = 500;
+    }
+
+    setTimeout(typeEffect, speed);
 }
 
-// Trigger skill bar animation when education section is visible
-const educationSection = document.querySelector('#education');
-if (educationSection) {
-    const educationObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateSkillBars();
-                educationObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
+// Start typing effect on load
+setTimeout(typeEffect, 1000);
 
-    educationObserver.observe(educationSection);
-}
+// GSAP Animations with ScrollTrigger
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
 
-// ============================================
-// STAT COUNTERS
-// ============================================
+    // Hero Section Animation
+    const tlHero = gsap.timeline();
+    tlHero.from(".greeting", { opacity: 0, y: 20, duration: 0.8, delay: 0.5 })
+        .from(".display-2", { opacity: 0, y: 30, duration: 0.8, ease: "power3.out" }, "-=0.6")
+        .from(".roles-container", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, "-=0.6")
+        .from(".lead", { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
+        .from(".btn", { opacity: 0, y: 20, duration: 0.8, stagger: 0.2 }, "-=0.6")
+        .from(".profile-card", { opacity: 0, x: 50, duration: 1, ease: "back.out(1.7)" }, "-=1")
+        .from(".scroll-indicator", { opacity: 0, y: -20, duration: 1 }, "-=0.5");
 
-function animateCounters() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-
-    statNumbers.forEach(element => {
-        const target = parseInt(element.textContent.replace(/\D/g, ''));
-        let current = 0;
-        const increment = target / 30;
-
-        const counter = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = element.textContent.replace(/\d+/, target);
-                clearInterval(counter);
-            } else {
-                const suffix = element.textContent.match(/[a-zA-Z+]/g) ? element.textContent.match(/[a-zA-Z+]/g)[0] : '';
-                element.textContent = Math.floor(current) + suffix;
-            }
-        }, 50);
-    });
-}
-
-// Trigger counter animation when stats section is visible
-const statsSection = document.querySelector('.stats-grid');
-if (statsSection) {
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounters();
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    statsObserver.observe(statsSection);
-}
-
-// ============================================
-// CONTACT FORM
-// ============================================
-
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
-
-        // Basic validation
-        if (!formData.name || !formData.email || !formData.message) {
-            showMessage('Please fill in all fields', 'error');
-            return;
-        }
-
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            showMessage('Please enter a valid email address', 'error');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+    // Common scroll reveal utility
+    const revealElements = (selector, yOffset = 50, staggerTime = 0) => {
+        const elements = document.querySelectorAll(selector);
+        if (elements.length > 0) {
+            gsap.from(elements, {
+                scrollTrigger: {
+                    trigger: elements[0],
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
                 },
-                body: JSON.stringify(formData)
+                opacity: 0,
+                y: yOffset,
+                duration: 1,
+                stagger: staggerTime,
+                ease: "power3.out"
             });
+        }
+    };
 
-            const result = await response.json();
+    // Apply reveals
+    revealElements(".about-text", 50);
+    revealElements(".about-cards .glass-card", 50, 0.2);
+    revealElements(".timeline-item", 50, 0.2);
+    revealElements(".skills-category", 40, 0.2);
+    revealElements(".project-card-anim", 50, 0.15);
+    revealElements(".achievements-anim", 50, 0.15);
+    revealElements(".social-card", 30, 0.1);
+    revealElements("#contactForm", 50);
 
-            if (response.ok) {
-                showMessage(result.message, 'success');
-                contactForm.reset();
-            } else {
-                showMessage(result.message || 'Something went wrong', 'error');
+    // Statistics Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    let hasCounted = false;
+
+    if (counters.length > 0) {
+        ScrollTrigger.create({
+            trigger: "#statistics",
+            start: "top 85%",
+            onEnter: () => {
+                if (!hasCounted) {
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+
+                        gsap.to(counter, {
+                            innerHTML: target,
+                            duration: 2.5,
+                            ease: "power2.out",
+                            snap: { innerHTML: 1 },
+                            onUpdate: function () {
+                                counter.innerHTML = Math.round(counter.innerHTML) + "+";
+                            }
+                        });
+                    });
+                    hasCounted = true;
+                }
             }
-        } catch (error) {
-            showMessage('Failed to send message. Please try again.', 'error');
-            console.error('Error:', error);
-        }
-    });
-}
-
-function showMessage(message, type) {
-    // Create a toast notification
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#e85d87' : '#d63a5a'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(232, 93, 135, 0.3);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease-out;
-        font-weight: 600;
-    `;
-
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.animation = 'slideInLeft 0.3s ease-out reverse';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// ============================================
-// MOBILE NAVIGATION
-// ============================================
-
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('nav ul');
-
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-
-        // Animate hamburger
-        const spans = navToggle.querySelectorAll('span');
-        if (navMenu.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translateY(10px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translateY(-10px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
-    });
-
-    // Close menu when link is clicked
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            const spans = navToggle.querySelectorAll('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
         });
-    });
+    }
 }
 
-// ============================================
-// SMOOTH SCROLLING
-// ============================================
-
+// Smooth Scrolling for Nav Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            // Adjust offset for fixed header
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+
+        // Close mobile navbar if open
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            navbarToggler.click();
         }
     });
 });
 
-// ============================================
-// BACK TO TOP BUTTON
-// ============================================
-
-function createBackToTopButton() {
-    const backToTopBtn = document.createElement('button');
-    backToTopBtn.innerHTML = '↑';
-    backToTopBtn.className = 'back-to-top';
-    backToTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #e85d87 0%, #d63a5a 100%);
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 1.5rem;
-        font-weight: bold;
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(232, 93, 135, 0.3);
-    `;
-
-    document.body.appendChild(backToTopBtn);
-
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            backToTopBtn.style.opacity = '1';
-            backToTopBtn.style.visibility = 'visible';
-        } else {
-            backToTopBtn.style.opacity = '0';
-            backToTopBtn.style.visibility = 'hidden';
-        }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    backToTopBtn.addEventListener('mouseover', () => {
-        backToTopBtn.style.transform = 'scale(1.1)';
-    });
-
-    backToTopBtn.addEventListener('mouseout', () => {
-        backToTopBtn.style.transform = 'scale(1)';
-    });
-}
-
-document.addEventListener('DOMContentLoaded', createBackToTopButton);
-
-// ============================================
-// ACTIVE NAV LINK
-// ============================================
-
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === current) {
-                link.classList.add('active');
-            }
-        });
-    });
-}
-
-document.addEventListener('DOMContentLoaded', updateActiveNavLink);
-
-// ============================================
-// TYPING EFFECT
-// ============================================
-
-function typeEffect(element, text, speed = 50) {
-    let index = 0;
-    element.textContent = '';
-
-    function type() {
-        if (index < text.length) {
-            element.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, speed);
-        }
+// Navbar background styling on scroll
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.glass-nav');
+    if (window.scrollY > 50) {
+        nav.style.background = 'rgba(5, 8, 22, 0.9)';
+        nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+    } else {
+        nav.style.background = 'rgba(5, 8, 22, 0.7)';
+        nav.style.boxShadow = 'none';
     }
-
-    type();
-}
-
-// Apply typing effect to hero tagline
-const tagline = document.querySelector('.hero-tagline');
-if (tagline) {
-    const text = tagline.textContent;
-    setTimeout(() => {
-        typeEffect(tagline, text, 30);
-    }, 500);
-}
-
-// ============================================
-// PAGE TRANSITIONS
-// ============================================
-
-// Fade in effect for page load
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
 });
 
-// Smooth page transitions
-document.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('/')) {
+// Contact Form → Formspree (delivers email directly to Gmail inbox)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.3s ease-out';
 
-        setTimeout(() => {
-            window.location.href = e.target.getAttribute('href');
-        }, 300);
-    }
-});
+        const btn        = document.getElementById('contactSubmitBtn');
+        const name       = document.getElementById('contactName').value.trim();
+        const existingBanner = document.getElementById('formBanner');
+        if (existingBanner) existingBanner.remove();
 
-// ============================================
-// CARD HOVER EFFECTS
-// ============================================
+        // Loading state
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending…';
 
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjyaebr';
 
-        card.style.setProperty('--mouse-x', x + 'px');
-        card.style.setProperty('--mouse-y', y + 'px');
-    });
-});
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(contactForm)
+            });
 
-// ============================================
-// LAZY LOADING
-// ============================================
+            const banner = document.createElement('div');
+            banner.id = 'formBanner';
+            banner.style.cssText = `
+                margin-top: 16px;
+                border-radius: 12px;
+                padding: 14px;
+                text-align: center;
+                font-size: 0.95rem;
+            `;
 
-if ('IntersectionObserver' in window) {
-    const lazyImages = document.querySelectorAll('img[data-src]');
-
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
+            if (response.ok) {
+                banner.style.cssText += `
+                    background: rgba(0,229,255,0.12);
+                    border: 1px solid rgba(0,229,255,0.4);
+                    color: #00e5ff;
+                `;
+                banner.innerHTML = `<i class="fas fa-check-circle" style="margin-right:8px;"></i>Message sent! I'll get back to you soon, ${name}.`;
+                contactForm.reset();
+            } else {
+                const data = await response.json();
+                const errMsg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong.';
+                banner.style.cssText += `
+                    background: rgba(255,80,80,0.12);
+                    border: 1px solid rgba(255,80,80,0.4);
+                    color: #ff6b6b;
+                `;
+                banner.innerHTML = `<i class="fas fa-exclamation-circle" style="margin-right:8px;"></i>${errMsg}`;
             }
-        });
-    });
 
-    lazyImages.forEach(img => imageObserver.observe(img));
-}
+            contactForm.appendChild(banner);
+            setTimeout(() => banner.remove(), 6000);
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-// Get current year for footer
-function updateYear() {
-    const yearElement = document.getElementById('current-year');
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
-}
-
-document.addEventListener('DOMContentLoaded', updateYear);
-
-// Ripple effect on button click
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function (e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            left: ${x}px;
-            top: ${y}px;
-            pointer-events: none;
-            animation: rippleEffect 0.6s ease-out;
-        `;
-
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
-
-// Add ripple animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes rippleEffect {
-        to {
-            transform: scale(4);
-            opacity: 0;
+        } catch (err) {
+            console.error('Form submission error:', err);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = 'Send Message <i class="fas fa-paper-plane ms-2"></i>';
         }
-    }
-`;
-document.head.appendChild(style);
-
-console.log('Portfolio website loaded successfully!');
+    });
+}

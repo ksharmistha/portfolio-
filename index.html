@@ -1,130 +1,561 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}{{ data.name }} - {{ data.title }}{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.Keerthana Sharmistha | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-{% block content %}
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content scroll-animate">
-        <h1>{{ data.name }}</h1>
-        <p class="hero-subtitle">{{ data.title }}</p>
-        <p class="hero-tagline">{{ data.tagline }}</p>
+<body class="dark-theme">
 
-        <div class="hero-buttons">
-            <a href="/about" class="btn btn-primary">View Portfolio</a>
-            <a href="#" class="btn btn-secondary">Download Resume</a>
-            <a href="/connect" class="btn btn-tertiary">Contact Me</a>
-        </div>
-
-        <!-- Social Icons -->
-        <div class="social-links" style="margin-top: 3rem;">
-            <a href="{{ data.social_links.linkedin }}" target="_blank" class="social-icon" title="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="{{ data.social_links.github }}" target="_blank" class="social-icon" title="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="{{ data.social_links.leetcode }}" target="_blank" class="social-icon" title="LeetCode">
-                <i class="fas fa-code"></i>
-            </a>
-            <a href="{{ data.social_links.hackerrank }}" target="_blank" class="social-icon" title="HackerRank">
-                <i class="fas fa-h"></i>
-            </a>
-        </div>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="spinner"></div>
     </div>
-</section>
 
-<!-- Quick Intro Section -->
-<section id="quick-intro" style="background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%); padding: 4rem 0;">
-    <div class="container">
-        <div class="grid-3">
-            <div class="card scroll-animate">
-                <div style="text-align: center;">
-                    <i class="fas fa-code"
-                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
-                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Problem Solver</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Love tackling challenging technical problems with
-                        efficient solutions.</p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="#">K.</a>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-toggle="target=" #navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience & Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#connect">Connect</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Background Orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <!-- Section 1 - Hero -->
+    <section id="hero" class="d-flex align-items-center min-vh-100">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-6 hero-content mt-5 mt-lg-0">
+                    <p class="greeting text-cyan mb-2">HELLO, I'M</p>
+                    <h1 class="display-2 fw-bolder mb-3 text-white">N.KEERTHANA SHARMISTHA</h1>
+                    <div class="h3 mb-4 roles-container text-purple">
+                        I am an <span class="typing-text"></span><span class="cursor">&nbsp;</span>
+                    </div>
+                    <p class="lead text-light-gray mb-5">
+                        Building intelligent solutions through code, creativity, and continuous learning.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#projects" class="btn btn-primary-custom">View My Work</a>
+                        <a href="mailto:keerthanasharmitha@gmail.com" class="btn btn-outline-custom">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center position-relative mb-5 mb-lg-0 mt-5 mt-lg-0">
+                    <div class="profile-card glass-card">
+                        <!-- Placeholder Profile Image -->
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600"
+                            alt="N.Keerthana Sharmistha" class="img-fluid profile-img">
+                    </div>
                 </div>
             </div>
-
-            <div class="card scroll-animate" style="animation-delay: 0.1s;">
-                <div style="text-align: center;">
-                    <i class="fas fa-lightning-bolt"
-                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
-                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Quick Learner</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Adapt quickly to new technologies and expand knowledge
-                        continuously.</p>
-                </div>
-            </div>
-
-            <div class="card scroll-animate" style="animation-delay: 0.2s;">
-                <div style="text-align: center;">
-                    <i class="fas fa-handshake"
-                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
-                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Team Player</h3>
-                    <p style="color: #666; font-size: 0.95rem;">Collaborate effectively and contribute positively to
-                        projects and teams.</p>
+            <div class="scroll-indicator d-none d-md-block">
+                <div class="mouse">
+                    <div class="wheel"></div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Featured Work Preview -->
-<section style="padding: 4rem 0;">
-    <div class="container">
-        <h2>Featured Work</h2>
-        <p class="section-subtitle">A selection of projects that showcase my skills and creativity</p>
-
-        <div class="grid-2">
-            <div class="card scroll-animate">
-                <div class="card-image">📱</div>
-                <h3 class="card-title">Web Application Project</h3>
-                <p class="card-text">Built a responsive web application using Flask and modern front-end technologies.
-                    Implemented user authentication and database management.</p>
-                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                    <span
-                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Flask</span>
-                    <span
-                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
+    <!-- Section 2 - About Me -->
+    <section id="about" class="py-5 section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5"><span class="text-gradient">About</span> Me</h2>
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center about-text glass-card p-4 p-md-5">
+                    <p class="lead text-light-gray mb-0">
+                        I am an enthusiastic engineering student with a strong passion for continuous learning and
+                        building versatile skills across multiple domains. I strive to grow as a “jack of all trades,”
+                        adapting quickly and performing effectively under proper guidance. Known for strong time
+                        management and organizational abilities, I consistently maintain productivity and balance
+                        multiple responsibilities efficiently. I have developed solid expertise in vibe coding and
+                        organizing, and I am committed to expanding my knowledge while contributing meaningfully to
+                        projects and teams.
+                    </p>
                 </div>
             </div>
 
-            <div class="card scroll-animate" style="animation-delay: 0.1s;">
-                <div class="card-image">🤖</div>
-                <h3 class="card-title">Data Science Project</h3>
-                <p class="card-text">Analyzed large datasets using Python and machine learning libraries. Created
-                    visualizations and predictive models with high accuracy rates.</p>
-                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                    <span
-                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
-                    <span
-                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">ML</span>
+            <div class="row g-4 about-cards">
+                <div class="col-md-4">
+                    <div class="glass-card hover-lift p-4 text-center h-100">
+                        <i class="fas fa-brain fa-3x text-cyan mb-3"></i>
+                        <h4 class="text-white">AI Innovator</h4>
+                        <p class="text-light-gray small mb-0">Developing scalable AI solutions, fine-tuning LLMs, and
+                            integrating MLOps concepts.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card hover-lift p-4 text-center h-100">
+                        <i class="fas fa-laptop-code fa-3x text-purple mb-3"></i>
+                        <h4 class="text-white">Full-Stack Developer</h4>
+                        <p class="text-light-gray small mb-0">Building robust frontend and backend architectures for
+                            seamless user experiences.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card hover-lift p-4 text-center h-100">
+                        <i class="fas fa-users fa-3x text-cyan mb-3"></i>
+                        <h4 class="text-white">Community Leader</h4>
+                        <p class="text-light-gray small mb-0">Organizing events, guiding aspirants, and fostering
+                            collaborative team environments.</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="/about" class="btn btn-primary">View All Projects</a>
+    <!-- Section 3 - Experience & Skills -->
+    <section id="experience" class="py-5 section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title mb-5"><span class="text-gradient">Experience</span></h2>
+                    <div class="timeline mb-5">
+                        <div class="timeline-item glass-card hover-lift p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap gap-2">
+                                <h4 class="text-white mb-0">VISHWAM AI</h4>
+                                <span class="badge bg-purple text-white">Apr 2025 – Nov 2025</span>
+                            </div>
+                            <p class="text-cyan mb-2 fw-semibold">Technical Lead Intern</p>
+                            <ul class="text-light-gray small mb-0 ps-3">
+                                <li class="mb-1">Contributed to fine-tuning and evaluation of LLM-based models for Indic
+                                    language processing tasks.</li>
+                                <li class="mb-1">Worked on deployment pipelines, Git-based version control, and CI/CD
+                                    practices for streamlined workflows.</li>
+                                <li class="mb-1">Collaborated on dataset curation, annotation, and deployment-oriented
+                                    AI systems with scalable backend integration.</li>
+                                <li>Led AI pipeline development using Python, NLP, and Transformer architectures for
+                                    multilingual applications.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title mb-5"><span class="text-gradient">Education</span></h2>
+                    <div class="timeline">
+                        <div class="timeline-item glass-card hover-lift p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap gap-2">
+                                <h4 class="text-white mb-0">Sreenidhi Institute of Science and Technology</h4>
+                                <span class="badge bg-purple text-white">2023 - 2026</span>
+                            </div>
+                            <p class="text-cyan mb-2 fw-semibold">B.Tech - Computer Science (AIML)</p>
+                            <p class="text-light-gray small mb-1"><strong>CGPA:</strong> 7.8</p>
+                            <p class="text-light-gray small mb-1"><strong>Coursework:</strong> Data Structures,
+                                Algorithms, Databases, Computer Systems, Machine Learning.</p>
+                            <p class="text-light-gray small mb-0"><strong>Research:</strong> Machine Intelligence
+                                (Random forest approach).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skills" class="col-lg-6">
+                    <h2 class="section-title mb-5"><span class="text-gradient">Skills</span></h2>
+
+                    <div class="skills-category mb-4 glass-card p-4 hover-lift">
+                        <h5 class="text-white mb-3"><i class="fas fa-terminal text-cyan me-2"></i>Programming Languages
+                        </h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="skill-badge hover-glow">Python</span>
+                            <span class="skill-badge hover-glow">C</span>
+                            <span class="skill-badge hover-glow">C++</span>
+                            <span class="skill-badge hover-glow">Java</span>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="skills-category glass-card p-4 hover-lift h-100">
+                                <h5 class="text-white mb-3"><i class="fas fa-desktop text-purple me-2"></i>Frontend</h5>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="skill-badge hover-glow">HTML/CSS</span>
+                                    <span class="skill-badge hover-glow">JavaScript</span>
+                                    <span class="skill-badge hover-glow">React.js</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skills-category glass-card p-4 hover-lift h-100">
+                                <h5 class="text-white mb-3"><i class="fas fa-server text-cyan me-2"></i>Backend</h5>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="skill-badge hover-glow">Python</span>
+                                    <span class="skill-badge hover-glow">Java</span>
+                                    <span class="skill-badge hover-glow">SQL (MySQL)</span>
+                                    <span class="skill-badge hover-glow">MongoDB</span>
+                                    <span class="skill-badge hover-glow">FastAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category mb-4 glass-card p-4 hover-lift">
+                        <h5 class="text-white mb-3"><i class="fas fa-cubes text-purple me-2"></i>Frameworks & Libraries
+                        </h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="skill-badge hover-glow">Streamlit</span>
+                            <span class="skill-badge hover-glow">Hugging Face Transformers</span>
+                            <span class="skill-badge hover-glow">PyTorch</span>
+                            <span class="skill-badge hover-glow">Scikit-learn</span>
+                            <span class="skill-badge hover-glow">NumPy</span>
+                            <span class="skill-badge hover-glow">Pandas</span>
+                            <span class="skill-badge hover-glow">SciPy</span>
+                            <span class="skill-badge hover-glow">Matplotlib</span>
+                            <span class="skill-badge hover-glow">Seaborn</span>
+                            <span class="skill-badge hover-glow">OpenCV</span>
+                            <span class="skill-badge hover-glow">Ollama</span>
+                            <span class="skill-badge hover-glow">Power BI</span>
+                        </div>
+                    </div>
+
+                    <div class="skills-category glass-card p-4 hover-lift">
+                        <h5 class="text-white mb-3"><i class="fas fa-tools text-cyan me-2"></i>Tools</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="skill-badge hover-glow">Git</span>
+                            <span class="skill-badge hover-glow">GitHub</span>
+                            <span class="skill-badge hover-glow">GitLab</span>
+                            <span class="skill-badge hover-glow">Vercel</span>
+                            <span class="skill-badge hover-glow">Figma</span>
+                            <span class="skill-badge hover-glow">Notion</span>
+                            <span class="skill-badge hover-glow">LeetCode</span>
+                            <span class="skill-badge hover-glow">Google Analytics</span>
+                            <span class="skill-badge hover-glow">OBS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Call to Action -->
-<section style="background: var(--gradient-pink); color: white; padding: 4rem 0; text-align: center;">
-    <div class="container scroll-animate">
-        <h2 style="color: white; margin-bottom: 1.5rem;">Let's Work Together</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9);">
-            I'm always interested in hearing about new projects and opportunities.
-        </p>
-        <a href="/connect" class="btn btn-secondary" style="background: white; color: #e85d87;">Get In Touch</a>
-    </div>
-</section>
+    <!-- Section 4 - Projects -->
+    <section id="projects" class="py-5 section-padding position-relative">
+        <div class="container">
+            <h2 class="section-title text-center mb-5"><span class="text-gradient">Projects</span></h2>
 
-<style>
-    nav a.active::after {
-        width: 100%;
-    }
-</style>
-{% endblock %}
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-lg-6 project-card-anim">
+                    <div class="glass-card hover-lift p-4 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="text-white fw-bold"><i class="fas fa-leaf text-cyan me-2"></i>Sattva-AI</h4>
+                        </div>
+                        <h6 class="text-purple mb-3">Mental Health Wellbeing App</h6>
+                        <ul class="text-light-gray small ps-3 mb-4 flex-grow-1">
+                            <li class="mb-1">Developed an AI-driven mental health wellness app to track emotional
+                                well-being, manage stress, and improve mental resilience through personalized insights.
+                            </li>
+                            <li class="mb-1">Designed scalable project architecture and modular workflows for efficient
+                                frontend-backend integration.</li>
+                            <li class="mb-1">Implemented data-driven analytics and explored MLOps concepts for model
+                                integration, monitoring, and deployment.</li>
+                            <li>Applied CI/CD practices for streamlined testing and maintenance.</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">HTML</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">React.js</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Python</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray mb-1 fw-normal px-2 py-1">SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-lg-6 project-card-anim">
+                    <div class="glass-card hover-lift p-4 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="text-white fw-bold"><i class="fas fa-building text-purple me-2"></i>AROGHYA-ARO
+                            </h4>
+                        </div>
+                        <h6 class="text-cyan mb-3">Mental Health Wellbeing Website for Employees</h6>
+                        <ul class="text-light-gray small ps-3 mb-4 flex-grow-1">
+                            <li class="mb-1">Developed a centralized employee wellness platform focused on mental health
+                                tracking, support systems, and engagement analytics.</li>
+                            <li class="mb-1">Designed scalable system architecture and database workflows for secure
+                                user management.</li>
+                            <li class="mb-1">Integrated AI-based functionalities using Open-Source LLMs and predictive
+                                analytics concepts.</li>
+                            <li>Implemented CI/CD deployment workflows and followed modular backend development
+                                practices.</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">HTML/CSS</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Python</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Open-Source
+                                LLMs</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray mb-1 fw-normal px-2 py-1">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-lg-6 project-card-anim">
+                    <div class="glass-card hover-lift p-4 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="text-white fw-bold"><i class="fas fa-shield-virus text-cyan me-2"></i>ADEGuard
+                            </h4>
+                        </div>
+                        <h6 class="text-purple mb-3">AI-Powered Vaccine Side Effect Drug Analysis</h6>
+                        <ul class="text-light-gray small ps-3 mb-4 flex-grow-1">
+                            <li class="mb-1">Developed an AI healthcare application for analyzing and predicting Adverse
+                                Drug Events (ADEs) related to vaccines using real-world data.</li>
+                            <li class="mb-1">Built analytical pipelines for predictive analytics, data processing, and
+                                healthcare insights.</li>
+                            <li class="mb-1">Applied machine learning and explored MLOps practices for model lifecycle
+                                management.</li>
+                            <li>Created dashboards and visual analytical outputs for interpreting data trends.</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Flask</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Streamlit</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Python</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray mb-1 fw-normal px-2 py-1">Ollama
+                                LLM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="col-lg-6 project-card-anim">
+                    <div class="glass-card hover-lift p-4 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="text-white fw-bold"><i class="fas fa-language text-purple me-2"></i>Telugu
+                                Pathashala</h4>
+                        </div>
+                        <h6 class="text-cyan mb-3">AI Meets Telugu Education</h6>
+                        <ul class="text-light-gray small ps-3 mb-4 flex-grow-1">
+                            <li class="mb-1">Developed an AI-powered multilingual study companion to simplify complex
+                                concepts in Telugu with English-mixed support.</li>
+                            <li class="mb-1">Designed scalable architecture with modular NLP pipelines, backend
+                                integration, and multilingual content workflows.</li>
+                            <li class="mb-1">Implemented automation-focused features and explored CI/CD practices for
+                                efficient deployment.</li>
+                            <li>Applied system design principles to improve scalability, accessibility, and performance.
+                            </li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Streamlit</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Python</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray me-1 mb-1 fw-normal px-2 py-1">Open-Source
+                                LLMs</span>
+                            <span
+                                class="badge bg-glass border border-secondary text-light-gray mb-1 fw-normal px-2 py-1">NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 - Achievements & Extracurriculars -->
+    <section id="achievements" class="py-5 section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5"><span class="text-gradient">Achievements & Activities</span></h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 achievements-anim">
+                    <h4 class="text-white mb-4"><i class="fas fa-trophy text-purple me-2"></i>Achievements</h4>
+                    <div class="glass-card hover-lift p-4 mb-4">
+                        <h5 class="text-white">1st Place - AI Hack Day 2025</h5>
+                        <p class="text-cyan small mb-2">Swecha AI</p>
+                        <p class="text-light-gray small mb-0">Secured 1st place in the Mental Health sector with the
+                            <strong>Sattva-AI</strong> project.</p>
+                    </div>
+                    <div class="glass-card hover-lift p-4">
+                        <h5 class="text-white">3rd Place - ASECDIO 2025</h5>
+                        <p class="text-cyan small mb-2">Sreenidhi Institute of Science and Technology</p>
+                        <p class="text-light-gray small mb-0">Participated in the Ideathon and secured 3rd place with
+                            the <strong>AROGYA-ARO</strong> project.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 achievements-anim">
+                    <h4 class="text-white mb-4"><i class="fas fa-star text-cyan me-2"></i>Extracurricular Activities
+                    </h4>
+                    <div class="glass-card hover-lift p-4 h-100">
+                        <h5 class="text-white">Organizing Head</h5>
+                        <p class="text-cyan small mb-3">Defence Aspirants Wing</p>
+                        <ul class="text-light-gray small mb-0 ps-3">
+                            <li class="mb-2">Led and coordinated events, awareness sessions, and student engagement
+                                activities for defence aspirants.</li>
+                            <li>Managed team operations, logistics, and end-to-end event execution.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="py-5 mb-5">
+        <div class="container">
+            <div class="glass-card p-4 p-md-5">
+                <div class="row text-center g-4">
+                    <div class="col-md-3 col-6 stat-item">
+                        <h2 class="display-4 fw-bold text-gradient counter" data-target="4">0</h2>
+                        <p class="text-white mb-0 mt-2">Major Projects</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item">
+                        <h2 class="display-4 fw-bold text-gradient counter" data-target="2">0</h2>
+                        <p class="text-white mb-0 mt-2">Hackathon Wins</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item">
+                        <h2 class="display-4 fw-bold text-gradient counter" data-target="25">0</h2>
+                        <p class="text-white mb-0 mt-2">Tech Skills</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item">
+                        <h2 class="display-4 fw-bold text-gradient counter" data-target="100">0</h2>
+                        <p class="text-white mb-0 mt-2">Problems Solved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-5 my-5 text-center px-3">
+        <div class="container">
+            <h2 class="display-5 text-white fw-bold mb-4">Ready to learn, contribute, and build impactful technology.
+            </h2>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-5">
+                <a href="https://www.linkedin.com/in/keerthana-sharmistha-411573304/" target="_blank"
+                    class="btn btn-primary-custom btn-lg">Hire Me</a>
+                <a href="mailto:keerthanasharmitha@gmail.com" class="btn btn-outline-custom btn-lg">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 - Connect -->
+    <section id="connect" class="py-5 section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Let's <span class="text-gradient">Connect</span></h2>
+
+            <div class="row g-4 mb-5 justify-content-center">
+                <div class="col-auto">
+                    <a href="https://www.linkedin.com/in/keerthana-sharmistha-411573304/"
+                        class="social-card glass-card hover-glow" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in text-white"></i>
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="https://github.com/ksharmistha" class="social-card glass-card hover-glow" target="_blank"
+                        aria-label="GitHub">
+                        <i class="fab fa-github text-white"></i>
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="mailto:keerthanasharmitha@gmail.com" class="social-card glass-card hover-glow"
+                        aria-label="Email">
+                        <i class="fas fa-envelope text-white"></i>
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="tel:+918106021030" class="social-card glass-card hover-glow" aria-label="Phone">
+                        <i class="fas fa-phone-alt text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card p-4 p-md-5">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <input type="text" id="contactName" name="name" class="form-control custom-input"
+                                        placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <input type="email" id="contactEmail" name="email" class="form-control custom-input"
+                                        placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <textarea id="contactMessage" name="message" class="form-control custom-input" rows="5"
+                                    placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" id="contactSubmitBtn" class="btn btn-primary-custom w-100 py-3">Send
+                                Message <i class="fas fa-paper-plane ms-2"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 mt-5 glass-nav text-center">
+        <div class="container">
+            <h3 class="text-white mb-3 fw-bold">N.Keerthana Sharmistha</h3>
+            <ul class="list-inline mb-4">
+                <li class="list-inline-item mx-2"><a href="#hero"
+                        class="text-light-gray text-decoration-none hover-text-cyan">Home</a></li>
+                <li class="list-inline-item mx-2"><a href="#about"
+                        class="text-light-gray text-decoration-none hover-text-cyan">About</a></li>
+                <li class="list-inline-item mx-2"><a href="#experience"
+                        class="text-light-gray text-decoration-none hover-text-cyan">Experience</a></li>
+                <li class="list-inline-item mx-2"><a href="#projects"
+                        class="text-light-gray text-decoration-none hover-text-cyan">Projects</a></li>
+                <li class="list-inline-item mx-2"><a href="#connect"
+                        class="text-light-gray text-decoration-none hover-text-cyan">Contact</a></li>
+            </ul>
+            <div class="mb-4">
+                <a href="https://www.linkedin.com/in/keerthana-sharmistha-411573304/" target="_blank"
+                    class="text-light-gray fs-4 mx-3 hover-text-cyan" style="transition: color 0.3s ease;"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/ksharmistha" target="_blank"
+                    class="text-light-gray fs-4 mx-3 hover-text-cyan" style="transition: color 0.3s ease;"><i
+                        class="fab fa-github"></i></a>
+            </div>
+            <p class="text-light-gray small mb-0">&copy; 2026 N.Keerthana Sharmistha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- GSAP ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
