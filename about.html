@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ data.name }}{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section
+    style="background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%); min-height: 60vh; display: flex; align-items: center; padding: 6rem 0; margin-top: 80px;">
+    <div class="container">
+        <h1 style="font-size: 3rem; margin-bottom: 2rem; text-align: center;">About Me</h1>
+        <p
+            style="font-size: 1.2rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; text-align: center;">
+            I am a Computer Science Engineering student with a strong interest in software development, artificial
+            intelligence, data science, and problem solving. I enjoy learning new technologies, building projects, and
+            continuously improving my technical skills. My goal is to contribute to impactful solutions while growing as
+            a software engineer.
+        </p>
+    </div>
+</section>
+
+<!-- Photo Gallery -->
+<section id="about" style="padding: 4rem 0;">
+    <div class="container">
+        <h2>My Journey</h2>
+        <p class="section-subtitle">A visual representation of my experiences and achievements</p>
+
+        <div class="grid-3">
+            <div class="card scroll-animate">
+                <div class="card-image"
+                    style="background: linear-gradient(135deg, #e85d87 0%, #d63a5a 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-graduation-cap" style="color: white; font-size: 3rem;"></i>
+                </div>
+                <h3 class="card-title">Academic Excellence</h3>
+                <p class="card-text">Consistently achieving high grades while actively participating in academic
+                    projects, competitions, and learning new programming languages and frameworks.</p>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.1s;">
+                <div class="card-image"
+                    style="background: linear-gradient(135deg, #f5a8c3 0%, #e85d87 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-laptop-code" style="color: white; font-size: 3rem;"></i>
+                </div>
+                <h3 class="card-title">Project Development</h3>
+                <p class="card-text">Built multiple projects ranging from web applications to data analysis tools.
+                    Experience with full-stack development, databases, and deployment.</p>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.2s;">
+                <div class="card-image"
+                    style="background: linear-gradient(135deg, #d63a5a 0%, #b82547 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-brain" style="color: white; font-size: 3rem;"></i>
+                </div>
+                <h3 class="card-title">Continuous Learning</h3>
+                <p class="card-text">Passionate about expanding my knowledge in AI, machine learning, and emerging
+                    technologies. Regularly take online courses and certifications.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Interests Section -->
+<section style="background: #f8f8f8; padding: 4rem 0;">
+    <div class="container">
+        <h2>My Interests & Passions</h2>
+        <p class="section-subtitle">What drives me and keeps me motivated</p>
+
+        <div class="grid-2">
+            <div class="card scroll-animate">
+                <h3 style="color: #e85d87; margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-code" style="margin-right: 0.5rem;"></i>Software Development
+                </h3>
+                <p>Passionate about writing clean, efficient code and building scalable applications. I enjoy working
+                    with both frontend and backend technologies.</p>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.1s;">
+                <h3 style="color: #e85d87; margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-robot" style="margin-right: 0.5rem;"></i>Artificial Intelligence
+                </h3>
+                <p>Fascinated by AI and machine learning. Interested in exploring neural networks, NLP, and computer
+                    vision applications.</p>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.2s;">
+                <h3 style="color: #e85d87; margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-chart-bar" style="margin-right: 0.5rem;"></i>Data Science
+                </h3>
+                <p>Love analyzing data and deriving meaningful insights. Experienced with data visualization and
+                    statistical analysis techniques.</p>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.3s;">
+                <h3 style="color: #e85d87; margin-bottom: 1rem; font-size: 1.3rem;">
+                    <i class="fas fa-problem-solving" style="margin-right: 0.5rem;"></i>Problem Solving
+                </h3>
+                <p>Enjoy tackling complex problems and finding optimal solutions. Regular participant in coding
+                    competitions and hackathons.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hobbies Section -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <h2>Beyond Code</h2>
+        <p class="section-subtitle">What I enjoy doing outside of programming</p>
+
+        <div class="grid-4">
+            <div class="card scroll-animate">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-book"
+                        style="font-size: 2rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h4>Reading</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Tech blogs, research papers, and fiction novels</p>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.1s;">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-music"
+                        style="font-size: 2rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h4>Music</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Listening and exploring various genres</p>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.2s;">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-running"
+                        style="font-size: 2rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h4>Fitness</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Sports and staying active</p>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.3s;">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-camera"
+                        style="font-size: 2rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h4>Photography</h4>
+                    <p style="font-size: 0.9rem; color: #666;">Capturing moments and creative shots</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="background: #f8f8f8; padding: 3rem 0; text-align: center;">
+    <div class="container">
+        <h3 style="margin-bottom: 1.5rem;">Want to know more?</h3>
+        <a href="/connect" class="btn btn-primary">Get In Touch</a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}{{ data.name }} - {{ data.title }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content scroll-animate">
+        <h1>{{ data.name }}</h1>
+        <p class="hero-subtitle">{{ data.title }}</p>
+        <p class="hero-tagline">{{ data.tagline }}</p>
+
+        <div class="hero-buttons">
+            <a href="/about" class="btn btn-primary">View Portfolio</a>
+            <a href="#" class="btn btn-secondary">Download Resume</a>
+            <a href="/connect" class="btn btn-tertiary">Contact Me</a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="social-links" style="margin-top: 3rem;">
+            <a href="{{ data.social_links.linkedin }}" target="_blank" class="social-icon" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="{{ data.social_links.github }}" target="_blank" class="social-icon" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="{{ data.social_links.leetcode }}" target="_blank" class="social-icon" title="LeetCode">
+                <i class="fas fa-code"></i>
+            </a>
+            <a href="{{ data.social_links.hackerrank }}" target="_blank" class="social-icon" title="HackerRank">
+                <i class="fas fa-h"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Intro Section -->
+<section id="quick-intro" style="background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%); padding: 4rem 0;">
+    <div class="container">
+        <div class="grid-3">
+            <div class="card scroll-animate">
+                <div style="text-align: center;">
+                    <i class="fas fa-code"
+                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Problem Solver</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Love tackling challenging technical problems with
+                        efficient solutions.</p>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.1s;">
+                <div style="text-align: center;">
+                    <i class="fas fa-lightning-bolt"
+                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Quick Learner</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Adapt quickly to new technologies and expand knowledge
+                        continuously.</p>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.2s;">
+                <div style="text-align: center;">
+                    <i class="fas fa-handshake"
+                        style="font-size: 2.5rem; color: #e85d87; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="color: #e85d87; margin-bottom: 0.5rem;">Team Player</h3>
+                    <p style="color: #666; font-size: 0.95rem;">Collaborate effectively and contribute positively to
+                        projects and teams.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Work Preview -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <h2>Featured Work</h2>
+        <p class="section-subtitle">A selection of projects that showcase my skills and creativity</p>
+
+        <div class="grid-2">
+            <div class="card scroll-animate">
+                <div class="card-image">📱</div>
+                <h3 class="card-title">Web Application Project</h3>
+                <p class="card-text">Built a responsive web application using Flask and modern front-end technologies.
+                    Implemented user authentication and database management.</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <span
+                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Flask</span>
+                    <span
+                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
+                </div>
+            </div>
+
+            <div class="card scroll-animate" style="animation-delay: 0.1s;">
+                <div class="card-image">🤖</div>
+                <h3 class="card-title">Data Science Project</h3>
+                <p class="card-text">Analyzed large datasets using Python and machine learning libraries. Created
+                    visualizations and predictive models with high accuracy rates.</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <span
+                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
+                    <span
+                        style="display: inline-block; padding: 0.3rem 0.8rem; background: #fce7f3; color: #e85d87; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">ML</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/about" class="btn btn-primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="background: var(--gradient-pink); color: white; padding: 4rem 0; text-align: center;">
+    <div class="container scroll-animate">
+        <h2 style="color: white; margin-bottom: 1.5rem;">Let's Work Together</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9);">
+            I'm always interested in hearing about new projects and opportunities.
+        </p>
+        <a href="/connect" class="btn btn-secondary" style="background: white; color: #e85d87;">Get In Touch</a>
+    </div>
+</section>
+
+<style>
+    nav a.active::after {
+        width: 100%;
+    }
+</style>
+{% endblock %}
