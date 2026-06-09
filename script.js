@@ -102,14 +102,14 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 if (!hasCounted) {
                     counters.forEach(counter => {
                         const target = +counter.getAttribute('data-target');
+                        const obj = { val: 0 };
 
-                        gsap.to(counter, {
-                            innerHTML: target,
+                        gsap.to(obj, {
+                            val: target,
                             duration: 2.5,
                             ease: "power2.out",
-                            snap: { innerHTML: 1 },
                             onUpdate: function () {
-                                counter.innerHTML = Math.round(counter.innerHTML) + "+";
+                                counter.textContent = Math.round(obj.val) + "+";
                             }
                         });
                     });
